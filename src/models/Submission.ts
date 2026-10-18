@@ -18,8 +18,7 @@ const itemSchema = new Schema({
     trim: true,
   },
   reportedBy: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+    type: String,
     required: [true, "reportedBy is required"],
   },
   status: {
