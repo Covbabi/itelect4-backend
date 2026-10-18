@@ -1,7 +1,7 @@
 import { Schema, model, models } from "mongoose";
 import type { ItemDoc } from "../types/index";
 
-const itemSchema = new Schema<ItemDoc>({
+const itemSchema = new Schema({
   title: {
     type: String,
     required: [true, "title is required"],
@@ -18,7 +18,8 @@ const itemSchema = new Schema<ItemDoc>({
     trim: true,
   },
   reportedBy: {
-    type: Number,
+    type: Schema.Types.ObjectId,
+    ref: "User",
     required: [true, "reportedBy is required"],
   },
   status: {
