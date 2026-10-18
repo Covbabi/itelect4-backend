@@ -2,7 +2,7 @@ export interface ItemDoc {
   title: string;
   description: string;
   location: string;
-  reportedBy: number; // match with Option A (number) or string with Option B
+  reportedBy: string; // ObjectId string reference to User
   status: "lost" | "found";
   createdAt?: Date;
 }
@@ -10,7 +10,7 @@ export interface ItemDoc {
 export interface UserDoc {
   name: string;
   email: string;
-  password?: string; // Add password here
+  password: string; // password is required on the document when selected
   role?: string;
   isActive?: boolean;
 }

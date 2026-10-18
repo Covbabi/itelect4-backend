@@ -1,12 +1,12 @@
 import { Schema, model } from "mongoose";
 import type { ItemDoc } from "../types/index";
 
-const itemSchema = new Schema<ItemDoc>(
+const itemSchema = new Schema(
   {
     title: { type: String, required: [true, "Item title is required"], trim: true },
     description: { type: String, required: true, trim: true },
     location: { type: String, required: [true, "Location is required"], trim: true },
-    reportedBy: { type: Number, required: true },
+    reportedBy: { type: String, required: true },
     status: { type: String, enum: ["lost", "found"], required: true },
   },
   { timestamps: true }
