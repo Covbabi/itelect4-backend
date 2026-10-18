@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import type { ItemDoc } from "../types/index.js";
+import { Schema, model, models } from "mongoose";
+import type { ItemDoc } from "../types/index";
 
 const itemSchema = new Schema<ItemDoc>({
   title: {
@@ -18,8 +18,7 @@ const itemSchema = new Schema<ItemDoc>({
     trim: true,
   },
   reportedBy: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+    type: Number,
     required: [true, "reportedBy is required"],
   },
   status: {
@@ -31,7 +30,7 @@ const itemSchema = new Schema<ItemDoc>({
 });
 
 itemSchema.set("toJSON", {
-  transform(_doc, ret: Record<string, unknown>) {
+  transform(_doc, ret: any) {
     ret.id = String(ret._id);
     delete ret._id;
     delete ret.__v;
@@ -39,4 +38,4 @@ itemSchema.set("toJSON", {
   },
 });
 
-export const Item = model<ItemDoc>("Item", itemSchema);
+export const Item = (models.Item as any) || model<ItemDoc>("Item", itemSchema);

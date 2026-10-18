@@ -2,9 +2,10 @@ import { Schema, model } from "mongoose";
 import type { UserDoc } from "../types/index";
 
 const userSchema = new Schema<UserDoc>({
-  name: { type: String, required: [true, "User name is required"], trim: true },
-  email: { type: String, required: [true, "User email is required"], unique: true, lowercase: true, trim: true },
-  role: { type: String, enum: ["student", "admin"], default: "student" },
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true }, // Add password field
+  role: { type: String, default: "student" },
   isActive: { type: Boolean, default: true },
 });
 

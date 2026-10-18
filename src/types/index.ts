@@ -2,15 +2,17 @@ export interface ItemDoc {
   title: string;
   description: string;
   location: string;
-  reportedBy: number;
+  reportedBy: number; // match with Option A (number) or string with Option B
   status: "lost" | "found";
+  createdAt?: Date;
 }
 
 export interface UserDoc {
   name: string;
   email: string;
-  role: "student" | "admin";
-  isActive: boolean;
+  password?: string; // Add password here
+  role?: string;
+  isActive?: boolean;
 }
 
 export interface ClaimDoc {
