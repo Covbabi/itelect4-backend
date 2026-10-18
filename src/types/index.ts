@@ -1,29 +1,25 @@
-import type { Types } from "mongoose";
-
-export interface User {
-  id:       number;
-  name:     string;
-  email:    string;
-  role:     "student" | "admin" | "instructor";
-  isActive: boolean;
-}
-
-export interface Recipe {
-  id:          number;
-  userId:      number;
-  title:       string;
+export interface ItemDoc {
+  title: string;
   description: string;
-  category:    "Breakfast" | "Lunch" | "Dinner" | "Dessert";
-  calories?:   number;
-  createdAt:   Date;
+  location: string;
+  reportedBy: string; // ObjectId string reference to User
+  status: "lost" | "found";
+  createdAt?: Date;
 }
 
-export type UserDoc = Omit<User, "id"> & {
-  password: string;
-};
+export interface UserDoc {
+  name: string;
+  email: string;
+  password: string; // password is required on the document when selected
+  role?: string;
+  isActive?: boolean;
+}
 
-export type RecipeDoc = Omit<Recipe, "id" | "userId"> & {
-  userId: Types.ObjectId;
-};
-
-export type NewRecipeBody = Pick<Recipe, "title" | "description" | "category" | "calories">;
+export interface ClaimDoc {
+  itemId: string;
+  claimedBy: number;
+  verifiedBy?: number;
+  submittedAt: Date;
+  status: "pending" | "verified";
+  itemTitle: string;
+}
