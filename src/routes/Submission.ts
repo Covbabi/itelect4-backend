@@ -1,8 +1,8 @@
 import { Router } from "express";
 import type { Request, Response } from "express";
-import { Item } from "../models/Submission.js";
-import { Claim } from "../models/Claim.js";
-import { requireAuth } from "../middleware/auth.js";
+import { Item } from "../models/Item";
+import { Claim } from "../models/Claim";
+import { requireAuth } from "../middleware/auth";
 
 export const itemsRouter = Router();
 export const claimsRouter = Router();

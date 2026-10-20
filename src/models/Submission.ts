@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose";
+import { Schema, model } from "mongoose";
 import type { ItemDoc } from "../types/index";
 
 const itemSchema = new Schema({
@@ -38,4 +38,4 @@ itemSchema.set("toJSON", {
   },
 });
 
-export const Item = (models.Item as any) || model<ItemDoc>("Item", itemSchema);
+export const Item = model<ItemDoc>("Item", itemSchema);
