@@ -6,7 +6,7 @@ import { authRouter } from "./routes/auth";
 import { itemRouter } from "./routes/items";
 import { userRouter } from "./routes/users";
 import { claimRouter } from "./routes/claim";
-import { itemsRouter, claimsRouter } from "./routes/Submission";
+import { itemsRouter, claimsRouter } from "./routes/submission";
 
 export const app = express();
 
