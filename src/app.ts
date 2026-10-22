@@ -9,13 +9,30 @@ import { claimRouter } from "./routes/claim";
 
 export const app = express();
 
-app.use(cors({ origin: process.env.CORS_ORIGIN || "*" }));
-app.use(express.json());
+const allowedOrigins = (process.env.CORS_ORIGIN || "*")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 
-app.use(async (_req: Request, _res: Response, next: NextFunction) => {
-  await connectDB();
-  next();
-});
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes("*")) {
+        callback(null, true);
+        return;
+      }
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+  })
+);
+app.use(express.json());
 
 app.get("/", (_req: Request, res: Response) => {
   res.json({ message: "Campus Lost & Found API is running" });
@@ -23,6 +40,15 @@ app.get("/", (_req: Request, res: Response) => {
 
 app.get("/api/health", (_req: Request, res: Response) => {
   res.json({ ok: true, db: mongoose.connection.readyState === 1 });
+});
+
+app.use(async (_req: Request, _res: Response, next: NextFunction) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    next(err);
+  }
 });
 
 app.use("/api/auth", authRouter);
@@ -54,7 +80,9 @@ app.use(
     }
 
     console.error(err);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({
+      message: err.message || "Internal server error",
+    });
   }
 );
 
