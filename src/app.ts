@@ -6,6 +6,7 @@ import { authRouter } from "./routes/auth";
 import { itemRouter } from "./routes/items";
 import { userRouter } from "./routes/users";
 import { claimRouter } from "./routes/claim";
+import { aiRouter } from "./routes/ai";
 
 export const app = express();
 
@@ -55,6 +56,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/items", itemRouter);
 app.use("/api/users", userRouter);
 app.use("/api/claims", claimRouter);
+app.use("/api/ai", aiRouter);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({
