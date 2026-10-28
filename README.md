@@ -1,3 +1,5 @@
+[![CI](https://github.com/Covbabi/itelect4-backend/actions/workflows/ci.yml/badge.svg)](https://github.com/Covbabi/itelect4-backend/actions/workflows/ci.yml)
+
 # ITELECT4 Backend and Frontend
 
 ## Project Links
